@@ -6,10 +6,14 @@ RUN apt install -y openssh-client
 
 ENV DISPLAY :99
 ENV RESOLUTION 1920x1080x24
+ENV VNC_PASSWORD alpine
+ENV V_USER alpine
+ENV V_UID 1000
+ENV V_GID 1000
 
-RUN addgroup --gid 1000 alpine
-RUN adduser --home /home/alpine --shell /bin/bash --system --disabled-password --uid 1000 --gid 1000 alpine && \
-    echo 'alpine ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN addgroup --gid $V_GID $V_USER
+RUN adduser --home /home/$V_USER --shell /bin/bash --system --disabled-password --uid $V_UID --gid $V_GID $V_USER && \
+    echo '$V_USER ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
     apt install -y ./google-chrome-stable_current_amd64.deb && \
@@ -19,7 +23,7 @@ COPY entry.sh /entry.sh
 
 RUN apt clean -y
 
-USER alpine
-WORKDIR /home/alpine
+USER $V_USER
+WORKDIR /home/$V_USER
 
 CMD [ "/bin/bash", "/entry.sh" ]
