@@ -1,4 +1,6 @@
 #!/bin/bash
+set -e
+set -x
 
 # XXX TBD - no need to do if it already exists?
 mkdir -p /home/$V_USER/.vnc && x11vnc -storepasswd $VNC_PASSWORD /home/$V_USER/.vnc/passwd
