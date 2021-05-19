@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+# these can only be changed only at image build time
+
 RUN apt update
 RUN DEBIAN_FRONTEND=noninteractive apt install -y ca-certificates curl openssl sudo bash xvfb x11vnc xfce4 faenza-icon-theme wget transmission-remote-gtk openssh-client
 
@@ -27,7 +29,7 @@ RUN adduser --home /home/$V_USER --shell /bin/bash --system --disabled-password 
 
 COPY entry.sh /entry.sh
 
-RUN timedatectl set-timezone $V_TIMEZONE
+RUN echo $V_TIMEZONE > /etc/timezone
 
 USER $V_USER
 WORKDIR /home/$V_USER
