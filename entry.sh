@@ -2,7 +2,9 @@
 set -e
 set -x
 
-# XXX TBD - no need to do if it already exists?
+# remove existing locks
+sudo rm -f /tmp/.X*
+
 mkdir -p /home/$V_USER/.vnc && x11vnc -storepasswd $VNC_PASSWORD /home/$V_USER/.vnc/passwd
 
 nohup /usr/bin/Xvfb $DISPLAY -screen 0 $RESOLUTION -ac +extension GLX +render -noreset &
