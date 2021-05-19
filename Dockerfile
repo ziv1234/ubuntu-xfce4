@@ -7,6 +7,7 @@ ENV V_UID 1000
 ENV V_GID 1000
 ENV TZ Asia/Jerusalem
 ENV OPTIONAL_APT transmission-remote-gtk openssh-client
+ENV V_USER_HOME /home/$V_USER
 
 # install packages
 RUN apt update
@@ -28,17 +29,16 @@ ENV VNC_PASSWORD pleasechange
 # copy script
 COPY entry.sh /entry.sh
 
-# set time zone
-RUN echo $V_TIMEZONE > /etc/timezone
-
 # create user not to run as root
 RUN addgroup --gid $V_GID $V_USER
-RUN adduser --home /home/$V_USER --shell /bin/bash --system --disabled-password --uid $V_UID --gid $V_GID $V_USER && \
-    echo "$V_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers && \
-    cat /etc/sudoers
+RUN adduser --home $V_USER_HOME --shell /bin/bash --system --disabled-password --uid $V_UID --gid $V_GID $V_USER && \
+    echo "$V_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers
+
+# set timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 USER $V_USER
-WORKDIR /home/$V_USER
+WORKDIR $V_USER_HOME
 
 EXPOSE $VNC_PORT
 
