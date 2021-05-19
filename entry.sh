@@ -5,8 +5,10 @@ set -x
 # remove existing locks
 sudo rm -f /tmp/.X*lock
 
+# create VNC password
 mkdir -p $V_USER_HOME/.vnc && x11vnc -storepasswd $VNC_PASSWORD $V_USER_HOME/.vnc/passwd
 
+# run VNC server, virtual frame buffer, and window manager
 nohup /usr/bin/Xvfb $DISPLAY -screen 0 $RESOLUTION -ac +extension GLX +render -noreset &
 sleep 1
 nohup startxfce4 &
