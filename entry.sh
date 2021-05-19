@@ -13,5 +13,10 @@ nohup startxfce4 &
 sleep 1
 nohup x11vnc -xkb -noxrecord -noxfixes -noxdamage -display $DISPLAY -forever -bg -rfbauth /home/$V_USER/.vnc/passwd -users $V_USER -rfbport $VNC_PORT &
 
+# disable power management and screen saver
+xset -dpms &
+xset s noblank &
+xset s off &
+
 sleep infinity
 
