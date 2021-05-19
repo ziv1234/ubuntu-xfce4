@@ -21,7 +21,8 @@ EXPOSE $VNC_PORT
 
 RUN addgroup --gid $V_GID $V_USER
 RUN adduser --home /home/$V_USER --shell /bin/bash --system --disabled-password --uid $V_UID --gid $V_GID $V_USER && \
-    echo '$V_USER ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+    echo "$V_USER ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers && \
+    cat /etc/sudoers
 
 COPY entry.sh /entry.sh
 

@@ -3,12 +3,14 @@ set -e
 set -x
 
 # remove existing locks
-sudo rm -f /tmp/.X*
+sudo rm -f /tmp/.X*lock
 
 mkdir -p /home/$V_USER/.vnc && x11vnc -storepasswd $VNC_PASSWORD /home/$V_USER/.vnc/passwd
 
 nohup /usr/bin/Xvfb $DISPLAY -screen 0 $RESOLUTION -ac +extension GLX +render -noreset &
+sleep 1
 nohup startxfce4 &
+sleep 1
 nohup x11vnc -xkb -noxrecord -noxfixes -noxdamage -display $DISPLAY -forever -bg -rfbauth /home/$V_USER/.vnc/passwd -users $V_USER -rfbport $VNC_PORT &
 
 sleep infinity
