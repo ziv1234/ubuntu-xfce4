@@ -16,6 +16,7 @@ ENV VNC_PORT 5900
 ENV V_USER xfce4
 ENV V_UID 1000
 ENV V_GID 1000
+ENV V_TIMEZONE Asia/Jerusalem
 
 EXPOSE $VNC_PORT
 
@@ -25,6 +26,8 @@ RUN adduser --home /home/$V_USER --shell /bin/bash --system --disabled-password 
     cat /etc/sudoers
 
 COPY entry.sh /entry.sh
+
+RUN timedatectl set-timezone $V_TIMEZONE
 
 USER $V_USER
 WORKDIR /home/$V_USER
