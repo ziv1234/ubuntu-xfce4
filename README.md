@@ -22,7 +22,7 @@ docker build -t ubuntu-xfce4 ubuntu-xfce4/
 #### Run Image
 
 ```sh
-docker run -it -p 5900:5900 --rm ubuntu-xfce4
+docker run -it -p 5900:5900 --rm -e RESOLUTION=1920x1080x24 -e VNC_PASSWORD=password ubuntu-xfce4
 ```
 
 #### Connect With VNC
