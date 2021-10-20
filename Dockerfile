@@ -13,10 +13,10 @@ ENV V_USER_HOME /home/$V_USER
 RUN apt update
 RUN DEBIAN_FRONTEND=noninteractive apt install -y ca-certificates curl openssl sudo bash xvfb x11vnc xfce4 faenza-icon-theme wget tzdata firefox $OPTIONAL_APT
 
-# install chrome
-RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
-    apt install -y ./google-chrome-stable_current_amd64.deb && \
-    rm -f ./google-chrome-stable_current_amd64.deb
+# DO NOT install chrome
+# RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb && \
+#     apt install -y ./google-chrome-stable_current_amd64.deb && \
+#     rm -f ./google-chrome-stable_current_amd64.deb
 
 # cleanup
 RUN apt clean -y
