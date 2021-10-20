@@ -1,6 +1,6 @@
 # ubuntu-xfce4
 
-Simple Docker image providing Xfce4 Desktop and VNC server with chrome and firefox.
+Simple Docker image providing Xfce4 Desktop and VNC server with firefox.
 
 #### Configuration
 
