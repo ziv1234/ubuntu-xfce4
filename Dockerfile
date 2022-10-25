@@ -1,4 +1,4 @@
-FROM ubuntu:focal-20220922
+FROM ubuntu:focal-20221019
 
 # these can only be changed only at image build time
 ENV VNC_PORT 5900
